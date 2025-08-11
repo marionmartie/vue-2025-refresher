@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-    bg: string,
+    bg?: string,
 }
 
 const props = withDefaults(defineProps<Props>(),{
