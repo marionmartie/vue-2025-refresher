@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import jobs from '@/jobs.json';
-
 import JobList from './JobList.vue';
+
+const props = defineProps<{
+  limit?: Number,
+}>()
 </script>
 
 <template>
@@ -11,7 +14,10 @@ import JobList from './JobList.vue';
           Browse Jobs
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <JobList v-for="job in jobs" :job="job" key="job.id" />
+          <JobList v-for="job in jobs.slice(0, limit)" 
+            :job="job" 
+            key="job.id"
+            :limit="(limit ? limit : 3)" />
         </div>
       </div>
     </section>

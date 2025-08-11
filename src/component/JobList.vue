@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import type { Job } from '@/types';
-import { ref } from 'vue';
+import { ref, type Ref } from 'vue';
+
 const props = defineProps<{
-    job: Job
+    job: Job,
+    limit?: Number,
 }>();
 
 const truncatedDescription = props.job.description.slice(0, 120) + '...'
-const toggleDescription = ref(false);
+const toggleDescription:Ref<Boolean> = ref(false);
 
 const seeMoreDescription = () => {
     toggleDescription.value = !toggleDescription.value
