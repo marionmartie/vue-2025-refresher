@@ -30,10 +30,10 @@ import { RouterLink } from 'vue-router';
                   class="text-white hover:bg-green-900 hover:text-white rounded-md px-3 py-2"
                   >Jobs</RouterLink
                 >
-                <a
-                  href="add-job.html"
+                <RouterLink
+                  to="/add-job"
                   class="text-white hover:bg-green-900 hover:text-white rounded-md px-3 py-2"
-                  >Add Job</a
+                  >Add Job</RouterLink
                 >
               </div>
             </div>
