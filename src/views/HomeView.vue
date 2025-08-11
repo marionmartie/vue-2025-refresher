@@ -7,5 +7,5 @@ import JobsList from '@/component/JobsList.vue';
 <template>
     <Hero />
     <Cards />
-    <JobsList />
+    <JobsList :limit="3" />
 </template>
