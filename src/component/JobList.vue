@@ -1,13 +1,21 @@
 <script setup lang="ts">
 import type { Job } from '@/types';
-import { ref, type Ref } from 'vue';
+import { ref, computed, type Ref, ComputedRef } from 'vue';
+import { RouterLink } from 'vue-router';
 
 const props = defineProps<{
     job: Job,
     limit?: Number,
 }>();
 
-const truncatedDescription = props.job.description.slice(0, 120) + '...'
+const truncatedDescription: ComputedRef = computed(() => {
+    let description: String = props.job.description
+    if (!toggleDescription.value) {
+        description = description.substring(0, 90) + '...'
+    }
+    
+    return description
+})
 const toggleDescription:Ref<Boolean> = ref(false);
 
 const seeMoreDescription = () => {
@@ -37,10 +45,10 @@ const seeMoreDescription = () => {
                     <i class="fa-solid fa-location-dot text-lg"></i>
                     {{ job.location }}
                 </div>
-                <a href="job.html"
+                <RouterLink :to="`/jobs/${job.id}`"
                     class="h-[36px] bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-center text-sm">
                     Read More
-                </a>
+                </RouterLink>
             </div>
         </div>
     </div>

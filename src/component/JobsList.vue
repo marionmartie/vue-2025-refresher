@@ -1,10 +1,23 @@
 <script setup lang="ts">
-import jobs from '@/jobs.json';
+import { onMounted, ref, type Ref } from 'vue';
 import JobList from './JobList.vue';
+import axios from 'axios';
+import { Job } from '@/types';
 
 const props = defineProps<{
-  limit?: Number,
+  limit?: number,
 }>()
+
+const jobs = ref<Job[]>([])
+
+onMounted(async() => {
+  try {
+    const res = await axios.get('http://localhost:5001/jobs')
+    jobs.value = res.data
+  } catch (error) {
+    console.error('Failed to fetch data', error)
+  }
+})
 </script>
 
 <template>
