@@ -1,14 +1,14 @@
 export interface Job {
-    id?: String,
-    title: String,
-    type: String,
-    description: String,
-    location: String,
-    salary: String,
+    id?: string,
+    title: string,
+    type: string,
+    description: string,
+    location: string,
+    salary: string,
     company: {
-        name: String,
-        description: String,
-        contactEmail: String,
-        contactPhone: String
+        name: string,
+        description: string,
+        contactEmail: string,
+        contactPhone: string
     }
 }

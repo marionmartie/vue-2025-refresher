@@ -3,6 +3,7 @@ import { onMounted, ref, type Ref } from 'vue';
 import JobList from './JobList.vue';
 import axios from 'axios';
 import { Job } from '@/types';
+import { RouterLink } from 'vue-router';
 
 const props = defineProps<{
   limit?: number,
@@ -12,7 +13,7 @@ const jobs = ref<Job[]>([])
 
 onMounted(async() => {
   try {
-    const res = await axios.get('http://localhost:5001/jobs')
+    const res = await axios.get('http://localhost:5002/jobs')
     jobs.value = res.data
   } catch (error) {
     console.error('Failed to fetch data', error)
@@ -35,11 +36,11 @@ onMounted(async() => {
       </div>
     </section>
 
-    <section class="m-auto max-w-lg my-10 px-6">
-      <a
-        href="jobs.html"
+    <section v-if="limit" class="m-auto max-w-lg my-10 px-6">
+      <RouterLink
+        to="/jobs"
         class="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
-        >View All Jobs</a
+        >View All Jobs</RouterLink
       >
     </section>
 </template>

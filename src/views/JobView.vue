@@ -13,7 +13,7 @@ const loading = ref(true)
 
 onMounted(async() => {
     try {
-        const res = await axios.get(`http://localhost:5001/jobs/${id}`)
+        const res = await axios.get(`http://localhost:5002/jobs/${id}`)
         job.value = res.data
     } catch (error) {
         console.error('Error fetching data', error)
@@ -45,6 +45,10 @@ onMounted(async() => {
             <p class="my-2">{{ job.company.description }}</p>
             <p class="my-2">{{ job.company.contactEmail }}</p>
             <p class="my-2">{{ job.company.contactPhone }}</p>
+        </div>
+        <div class="">
+            <a class="bg-green-500 text-white p-4 block rounded text-center mt-4 font-bold" :href="`/jobs/edit/${job.id}`">Edit Job</a>
+            <button class="bg-blue-400 text-white p-4 block rounded text-center mt-4 font-bold cursor-pointer w-full">Delete Job</button>
         </div>
     </div>
 </div>
