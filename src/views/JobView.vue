@@ -1,19 +1,33 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
+import { useRoute, RouterLink, useRouter } from 'vue-router';
 import { type Job } from '@/types'
 import {ref, onMounted} from 'vue'
 import axios from 'axios';
 import BackButton from '@/component/BackButton.vue';
 
+
 const route = useRoute()
+const router = useRouter()
 const id = route.params.id
 const job = ref<Job>()
 
 const loading = ref(true)
 
+const deleteJob = async () => {
+    try {
+        const confirm = window.confirm('Are you sure you want to delete?')
+        if (confirm) {
+            await axios.delete(`/api/jobs/${id}`)
+            router.push('/jobs')
+        }
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 onMounted(async() => {
     try {
-        const res = await axios.get(`http://localhost:5002/jobs/${id}`)
+        const res = await axios.get(`/api/jobs/${id}`)
         job.value = res.data
     } catch (error) {
         console.error('Error fetching data', error)
@@ -48,7 +62,7 @@ onMounted(async() => {
         </div>
         <div class="">
             <a class="bg-green-500 text-white p-4 block rounded text-center mt-4 font-bold" :href="`/jobs/edit/${job.id}`">Edit Job</a>
-            <button class="bg-blue-400 text-white p-4 block rounded text-center mt-4 font-bold cursor-pointer w-full">Delete Job</button>
+            <button @click="deleteJob" class="bg-blue-400 text-white p-4 block rounded text-center mt-4 font-bold cursor-pointer w-full">Delete Job</button>
         </div>
     </div>
 </div>

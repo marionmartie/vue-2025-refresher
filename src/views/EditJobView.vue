@@ -33,7 +33,7 @@ const submitForm = async () => {
         }
     }
     try {
-        const res = await axios.put(`http://localhost:5002/jobs/${id}`, updatedJob)
+        const res = await axios.put(`/api/jobs/${id}`, updatedJob)
         router.push(`/jobs/${res.data.id}`)
     } catch (error) {
         console.error('Error posting data', error)
@@ -42,7 +42,7 @@ const submitForm = async () => {
 
 onMounted(async () => {
     try {
-        const res = await axios.get(`http://localhost:5002/jobs/${id}`)
+        const res = await axios.get(`/api/jobs/${id}`)
         state.job = res.data
     } catch (error) {
         console.error(error)

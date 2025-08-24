@@ -33,7 +33,7 @@ const submitForm = async () => {
         }
     }
     try {
-        const res = await axios.post('http://localhost:5002/jobs', newJob)
+        const res = await axios.post('/api/jobs', newJob)
         router.push(`/jobs/${res.data.id}`)
     } catch (error) {
         console.error('Error posting data', error)

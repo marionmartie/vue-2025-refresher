@@ -13,7 +13,7 @@ const jobs = ref<Job[]>([])
 
 onMounted(async() => {
   try {
-    const res = await axios.get('http://localhost:5002/jobs')
+    const res = await axios.get('/api/jobs')
     jobs.value = res.data
   } catch (error) {
     console.error('Failed to fetch data', error)
